@@ -31,7 +31,19 @@ class App extends Component {
       ]
     });
   };
-
+  nameChangeHandler = e => {
+    this.setState({
+      persons: [
+        { name: e.target.value, age: 7899 },
+        {
+          name: "Blue",
+          age: 9,
+          plot: "My Hobbies: Fighting, I'm not the eloquent type you know"
+        },
+        { name: "Red", age: 17 }
+      ]
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -40,35 +52,38 @@ class App extends Component {
         <button
           onClick={this.switchNameHandler.bind(this, "Kaoru", "Goki", "Retsu")}
         >
-          Swithch Name
+          Toggle Characters
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(
-            this,
-            "Yujiro",
-            "Doppo",
-            "Atsushi"
-          )}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(
-            this,
-            "Atsushi Suedou",
-            "Mitsunari Tokugawa",
-            "Izo Motobe"
-          )}
-        >
-          {this.state.persons[1].plot}
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          click={this.switchNameHandler.bind(this, "One", "Two", "Three")}
-        />
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            changed={this.nameChangeHandler}
+            click={this.switchNameHandler.bind(
+              this,
+              "Yujiro",
+              "Doppo",
+              "Atsushi"
+            )}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(
+              this,
+              "Atsushi Suedou",
+              "Mitsunari Tokugawa",
+              "Izo Motobe"
+            )}
+          >
+            {this.state.persons[1].plot}
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            click={this.switchNameHandler.bind(this, "One", "Two", "Three")}
+          />
+        </div>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
