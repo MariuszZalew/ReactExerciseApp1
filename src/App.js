@@ -14,7 +14,8 @@ class App extends Component {
           plot: "My Hobbies: Fighting"
         },
         { name: "Baki", age: 27 }
-      ]
+      ],
+      toggleChar: false
     };
   }
 
@@ -44,16 +45,18 @@ class App extends Component {
       ]
     });
   };
+
+  toggleCharactersHandler = () => {
+    const lalaland = this.state.toggleChar;
+    this.setState({ toggleChar: !lalaland });
+    // !this.state.toggleChar;
+  };
+
   render() {
-    return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button
-          onClick={this.switchNameHandler.bind(this, "Kaoru", "Goki", "Retsu")}
-        >
-          Toggle Characters
-        </button>
+    let characters = null;
+
+    if (this.state.toggleChar) {
+      characters = (
         <div>
           <Person
             name={this.state.persons[0].name}
@@ -84,6 +87,17 @@ class App extends Component {
             click={this.switchNameHandler.bind(this, "One", "Two", "Three")}
           />
         </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p>This is really working!</p>
+        <button onClick={this.toggleCharactersHandler}>
+          Toggle Characters
+        </button>
+        {characters}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
