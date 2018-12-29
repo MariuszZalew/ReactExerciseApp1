@@ -7,13 +7,14 @@ class App extends Component {
     super(props);
     this.state = {
       persons: [
-        { name: "Yujiro", age: 78 },
+        { name: "Yujiro", age: 78, id: "ahet856" },
         {
           name: "Jack",
           age: 299,
-          plot: "My Hobbies: Fighting"
+          plot: "My Hobbies: Fighting",
+          id: "witb025"
         },
-        { name: "Baki", age: 27 }
+        { name: "Baki", age: 27, id: "pzra084" }
       ],
       toggleChar: false
     };
@@ -32,6 +33,14 @@ class App extends Component {
       ]
     });
   };
+
+  delCharHandler = perIndex => {
+    // const persons = this.state.persons;
+    const persons = [...this.state.persons];
+    persons.splice(perIndex, 1);
+    this.setState({ persons: persons });
+  };
+
   nameChangeHandler = e => {
     this.setState({
       persons: [
@@ -58,7 +67,17 @@ class App extends Component {
     if (this.state.toggleChar) {
       characters = (
         <div>
-          <Person
+          {this.state.persons.map((elem, index) => {
+            return (
+              <Person
+                name={elem.name}
+                age={elem.age}
+                key={elem.id}
+                click={this.delCharHandler.bind(this, index)}
+              />
+            );
+          })}
+          {/* <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
             changed={this.nameChangeHandler}
@@ -85,7 +104,7 @@ class App extends Component {
             name={this.state.persons[2].name}
             age={this.state.persons[2].age}
             click={this.switchNameHandler.bind(this, "One", "Two", "Three")}
-          />
+          /> */}
         </div>
       );
     }
