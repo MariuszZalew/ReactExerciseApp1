@@ -41,7 +41,18 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
-  nameChangeHandler = e => {
+  nameChangeHandler = (e, id) => {
+    const char = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const per = {
+      ...this.state.persons[char]
+    };
+    per.name = e.target.value;
+    const persons = [...this.state.persons];
+    persons[char] = per;
+
     this.setState({
       persons: [
         { name: e.target.value, age: 7899 },
@@ -74,6 +85,7 @@ class App extends Component {
                 age={elem.age}
                 key={elem.id}
                 click={this.delCharHandler.bind(this, index)}
+                changed={this.nameChangeHandler}
               />
             );
           })}
