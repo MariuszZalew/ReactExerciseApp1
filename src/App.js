@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import "bootstrap/dist/css/bootstrap.css";
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class App extends Component {
         },
         { name: "Baki", age: 27, id: "pzra084" }
       ],
-      toggleChar: false
+      toggleChar: false,
+      buttons: ["btn btn-success", "btn btn-danger"]
     };
   }
 
@@ -41,7 +43,6 @@ class App extends Component {
   };
 
   nameChangeHandler = (e, id) => {
-    // error handling 56
     // checking for the right 'person' index
     const char = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -91,34 +92,6 @@ class App extends Component {
               />
             );
           })}
-          {/* <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            changed={this.nameChangeHandler}
-            click={this.switchNameHandler.bind(
-              this,
-              "Yujiro",
-              "Doppo",
-              "Atsushi"
-            )}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(
-              this,
-              "Atsushi Suedou",
-              "Mitsunari Tokugawa",
-              "Izo Motobe"
-            )}
-          >
-            {this.state.persons[1].plot}
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            click={this.switchNameHandler.bind(this, "One", "Two", "Three")}
-          /> */}
         </div>
       );
     }
@@ -127,14 +100,19 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button onClick={this.toggleCharactersHandler}>
+        <button
+          className={
+            this.state.toggleChar
+              ? this.state.buttons[0]
+              : this.state.buttons[1]
+          }
+          onClick={this.toggleCharactersHandler}
+        >
           Toggle Characters
         </button>
         {characters}
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
-    // git remote set-url origin git@github.com:username/projectname.git
   }
 }
 
