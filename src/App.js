@@ -10,7 +10,7 @@ class App extends Component {
         { name: "Yujiro", age: 78, id: "ahet856" },
         {
           name: "Jack",
-          age: 299,
+          age: 29,
           plot: "My Hobbies: Fighting",
           id: "witb025"
         },
@@ -20,28 +20,29 @@ class App extends Component {
     };
   }
 
-  switchNameHandler = (arg1 = "one", arg2 = "two", arg3 = "three") => {
-    this.setState({
-      persons: [
-        { name: arg1, age: 7899 },
-        {
-          name: arg2,
-          age: 9,
-          plot: "My Hobbies: Fighting, I'm not the eloquent type you know"
-        },
-        { name: arg3, age: 17 }
-      ]
-    });
-  };
+  // switchNameHandler = (arg1 = "one", arg2 = "two", arg3 = "three") => {
+  //   this.setState({
+  //     persons: [
+  //       { name: arg1, age: 7899 },
+  //       {
+  //         name: arg2,
+  //         age: 9,
+  //         plot: "My Hobbies: Fighting, I'm not the eloquent type you know"
+  //       },
+  //       { name: arg3, age: 17 }
+  //     ]
+  //   });
+  // };
 
   delCharHandler = perIndex => {
-    // const persons = this.state.persons;
     const persons = [...this.state.persons];
     persons.splice(perIndex, 1);
     this.setState({ persons: persons });
   };
 
   nameChangeHandler = (e, id) => {
+    // error handling 56
+    // checking for the right 'person' index
     const char = this.state.persons.findIndex(p => {
       return p.id === id;
     });
@@ -85,6 +86,7 @@ class App extends Component {
                 age={elem.age}
                 key={elem.id}
                 click={this.delCharHandler.bind(this, index)}
+                //debug this!!
                 changed={this.nameChangeHandler}
               />
             );
