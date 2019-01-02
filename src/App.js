@@ -3,6 +3,12 @@ import "./App.css";
 import Person from "./Person/Person";
 import "bootstrap/dist/css/bootstrap.css";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee, faFistRaised } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCoffee, faFistRaised);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,20 +27,6 @@ class App extends Component {
       buttons: ["btn btn-success", "btn btn-danger"]
     };
   }
-
-  // switchNameHandler = (arg1 = "one", arg2 = "two", arg3 = "three") => {
-  //   this.setState({
-  //     persons: [
-  //       { name: arg1, age: 7899 },
-  //       {
-  //         name: arg2,
-  //         age: 9,
-  //         plot: "My Hobbies: Fighting, I'm not the eloquent type you know"
-  //       },
-  //       { name: arg3, age: 17 }
-  //     ]
-  //   });
-  // };
 
   delCharHandler = perIndex => {
     const persons = [...this.state.persons];
@@ -98,13 +90,15 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Hi, I'm a React App</h1>
+        <h1>
+          Hi, I'm a React App <FontAwesomeIcon icon="coffee" />
+        </h1>
         <p>This is really working!</p>
         <button
           className={
             this.state.toggleChar
-              ? this.state.buttons[0]
-              : this.state.buttons[1]
+              ? this.state.buttons[1]
+              : this.state.buttons[0]
           }
           onClick={this.toggleCharactersHandler}
         >
