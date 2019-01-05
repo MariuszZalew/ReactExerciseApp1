@@ -5,9 +5,13 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faFistRaised } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCoffee,
+  faFistRaised,
+  faSpinner
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faCoffee, faFistRaised);
+library.add(faCoffee, faFistRaised, faSpinner);
 
 class App extends Component {
   constructor(props) {
@@ -28,10 +32,11 @@ class App extends Component {
     };
   }
 
-  delCharHandler = perIndex => {
-    const persons = [...this.state.persons];
-    persons.splice(perIndex, 1);
-    this.setState({ persons: persons });
+  delCharHandler = perKey => {
+    let persons = [...this.state.persons];
+    persons = persons.filter(va => va.id !== perKey);
+    // persons.splice(perKey, 1);
+    this.setState({ persons });
   };
 
   nameChangeHandler = (e, id) => {
@@ -72,13 +77,14 @@ class App extends Component {
     if (this.state.toggleChar) {
       characters = (
         <div>
-          {this.state.persons.map((elem, index) => {
+          {this.state.persons.map(elem => {
+            const keyOf = elem.id;
             return (
               <Person
                 name={elem.name}
                 age={elem.age}
                 key={elem.id}
-                click={this.delCharHandler.bind(this, index)}
+                click={this.delCharHandler.bind(this, keyOf)}
                 //debug this!!
                 changed={this.nameChangeHandler}
               />
@@ -91,7 +97,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>
-          Hi, I'm a React App <FontAwesomeIcon icon="coffee" />
+          Hi, I'm a React App <FontAwesomeIcon icon="spinner" spin />
         </h1>
         <p>This is really working!</p>
         <button
