@@ -7,3 +7,10 @@
   text-align: center;
   color: brown;
 }
+.Point {
+  cursor: pointer;
+  color: rgb(19, 170, 145);
+}
+.Point:hover {
+  color: rgb(13, 72, 148);
+}

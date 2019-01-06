@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import Boss from "./Boss/Boss";
 import "bootstrap/dist/css/bootstrap.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,6 +18,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      boss: {
+        name: "Yujiro Hanma",
+        age: 999,
+        id: "gehq931"
+      },
       persons: [
         { name: "Yujiro", age: 78, id: "ahet856" },
         {
@@ -39,36 +45,28 @@ class App extends Component {
     this.setState({ persons });
   };
 
-  nameChangeHandler = (e, id) => {
+  nameChangeHandler = e => {
     // checking for the right 'person' index
-    const char = this.state.persons.findIndex(p => {
-      return p.id === id;
-    });
+    // const char = this.state.persons.findIndex(person => {
+    //   return person.id === 0;
+    // });
 
-    const per = {
-      ...this.state.persons[char]
-    };
-    per.name = e.target.value;
-    const persons = [...this.state.persons];
-    persons[char] = per;
+    // const per = {
+    //   ...this.state.persons[char]
+    // };
+    // per.name = e.target.value;
+
+    // const persons = [...this.state.persons];
+    // persons[char] = per;
 
     this.setState({
-      persons: [
-        { name: e.target.value, age: 7899 },
-        {
-          name: "Blue",
-          age: 9,
-          plot: "My Hobbies: Fighting, I'm not the eloquent type you know"
-        },
-        { name: "Red", age: 17 }
-      ]
+      boss: { name: e.target.value }
     });
   };
 
   toggleCharactersHandler = () => {
     const lalaland = this.state.toggleChar;
     this.setState({ toggleChar: !lalaland });
-    // !this.state.toggleChar;
   };
 
   render() {
@@ -77,6 +75,14 @@ class App extends Component {
     if (this.state.toggleChar) {
       characters = (
         <div>
+          <Boss
+            name={this.state.boss.name}
+            age={this.state.boss.age}
+            key={this.state.boss.id}
+            click={this.delCharHandler.bind(this, this.state.boss.id)}
+            //debug this!!
+            changed={this.nameChangeHandler}
+          />
           {this.state.persons.map(elem => {
             const keyOf = elem.id;
             return (
@@ -85,8 +91,6 @@ class App extends Component {
                 age={elem.age}
                 key={elem.id}
                 click={this.delCharHandler.bind(this, keyOf)}
-                //debug this!!
-                changed={this.nameChangeHandler}
               />
             );
           })}
