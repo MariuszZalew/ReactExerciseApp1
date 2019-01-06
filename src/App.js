@@ -71,15 +71,15 @@ class App extends Component {
 
   render() {
     let characters = null;
-
+    const { boss } = this.state;
     if (this.state.toggleChar) {
       characters = (
         <div>
           <Boss
-            name={this.state.boss.name}
-            age={this.state.boss.age}
-            key={this.state.boss.id}
-            click={this.delCharHandler.bind(this, this.state.boss.id)}
+            name={boss.name}
+            age={boss.age}
+            key={boss.id}
+            click={this.delCharHandler.bind(this, boss.id)}
             //debug this!!
             changed={this.nameChangeHandler}
           />
