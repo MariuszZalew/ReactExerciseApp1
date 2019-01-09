@@ -46,22 +46,20 @@ class App extends Component {
   };
 
   nameChangeHandler = e => {
-    // checking for the right 'person' index
-    // const char = this.state.persons.findIndex(person => {
-    //   return person.id === 0;
-    // });
-
-    // const per = {
-    //   ...this.state.persons[char]
-    // };
-    // per.name = e.target.value;
-
-    // const persons = [...this.state.persons];
-    // persons[char] = per;
-
     this.setState({
       boss: { name: e.target.value }
     });
+  };
+
+  nameChangeHandler2 = (e, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    const person = { ...this.state.persons[personIndex] };
+    person.name = e.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({ persons });
   };
 
   toggleCharactersHandler = () => {
@@ -80,17 +78,18 @@ class App extends Component {
             age={boss.age}
             key={boss.id}
             click={this.delCharHandler.bind(this, boss.id)}
-            //debug this!!
             changed={this.nameChangeHandler}
           />
           {this.state.persons.map(elem => {
-            const keyOf = elem.id;
             return (
               <Person
                 name={elem.name}
                 age={elem.age}
                 key={elem.id}
-                click={this.delCharHandler.bind(this, keyOf)}
+                click={this.delCharHandler.bind(this, elem.id)}
+                changed={e => {
+                  this.nameChangeHandler2(e, elem.id);
+                }}
               />
             );
           })}
