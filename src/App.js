@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Person from "./Person/Person";
-import Boss from "./Boss/Boss";
+import Person from "./Components/Person/Person";
+import Boss from "./Components/Boss/Boss";
+import Other from "./OtherComponent/Other";
 import "bootstrap/dist/css/bootstrap.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -15,33 +16,29 @@ import {
 library.add(faCoffee, faFistRaised, faSpinner);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      boss: {
-        name: "Yujiro Hanma",
-        age: 999,
-        id: "gehq931"
+  state = {
+    boss: {
+      name: "Yujiro Hanma",
+      age: 999,
+      id: "gehq931"
+    },
+    persons: [
+      { name: "Yujiro", age: 78, id: "ahet856" },
+      {
+        name: "Jack",
+        age: 29,
+        plot: "My Hobbies: Fighting",
+        id: "witb025"
       },
-      persons: [
-        { name: "Yujiro", age: 78, id: "ahet856" },
-        {
-          name: "Jack",
-          age: 29,
-          plot: "My Hobbies: Fighting",
-          id: "witb025"
-        },
-        { name: "Baki", age: 27, id: "pzra084" }
-      ],
-      toggleChar: false,
-      buttons: ["btn btn-success", "btn btn-danger"]
-    };
-  }
+      { name: "Baki", age: 27, id: "pzra084" }
+    ],
+    toggleChar: false,
+    buttons: ["btn btn-success", "btn btn-danger"]
+  };
 
   delCharHandler = perKey => {
     let persons = [...this.state.persons];
     persons = persons.filter(va => va.id !== perKey);
-    // persons.splice(perKey, 1);
     this.setState({ persons });
   };
 
@@ -86,13 +83,15 @@ class App extends Component {
                 name={elem.name}
                 age={elem.age}
                 key={elem.id}
-                click={this.delCharHandler.bind(this, elem.id)}
+                click={() => this.delCharHandler(elem.id)}
+                // click={this.delCharHandler.bind(this, elem.id)}
                 changed={e => {
                   this.nameChangeHandler2(e, elem.id);
                 }}
               />
             );
           })}
+          {/* here I can put another component */}
         </div>
       );
     }
@@ -114,6 +113,8 @@ class App extends Component {
           Toggle Characters
         </button>
         {characters}
+        {/* place for another component element */}
+        <Other />
       </div>
     );
   }
