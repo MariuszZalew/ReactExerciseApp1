@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Person from "./Components/Person/Person";
 import Boss from "./Components/Boss/Boss";
-import Other from "./OtherComponent/Other";
+// import Other from "./OtherComponent/Other";
+import Movies from "./OtherComponent/Movies.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -77,6 +78,7 @@ class App extends Component {
             click={this.delCharHandler.bind(this, boss.id)}
             changed={this.nameChangeHandler}
           />
+
           {this.state.persons.map(elem => {
             return (
               <Person
@@ -114,7 +116,8 @@ class App extends Component {
         </button>
         {characters}
         {/* place for another component element */}
-        <Other />
+        {/* <Other /> */}
+        <Movies />
       </div>
     );
   }
