@@ -1,7 +1,7 @@
 import PersonContainer from "../PersonContainer";
 import Boss from "../Boss/Boss";
 
-const Everyone = props => {
+const Everyone = ({ persons, boss }) => {
   return (
     <div>
       <Boss />
