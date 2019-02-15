@@ -1,0 +1,16 @@
+.Person {
+  width: 60%;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 3px #999;
+  padding: 16px;
+  text-align: center;
+  color: brown;
+}
+.Point {
+  cursor: pointer;
+  color: rgb(19, 170, 145);
+}
+.Point:hover {
+  color: rgb(13, 72, 148);
+}

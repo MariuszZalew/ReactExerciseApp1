@@ -1,5 +1,5 @@
 import React from "react";
-import "../Person/Person.css";
+// import "./boss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const boss = props => {

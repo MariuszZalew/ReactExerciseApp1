@@ -5,6 +5,7 @@ import Boss from "./Components/Boss/Boss";
 // import Other from "./OtherComponent/Other";
 import Movies from "./OtherComponent/Movies.jsx";
 import "bootstrap/dist/css/bootstrap.css";
+import PersonContainer from "./Components/PersonContainer";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +18,7 @@ import {
 library.add(faCoffee, faFistRaised, faSpinner);
 
 class App extends Component {
+  //CLASS state
   state = {
     boss: {
       name: "Yujiro Hanma",
@@ -37,6 +39,57 @@ class App extends Component {
     buttons: ["btn btn-success", "btn btn-danger"]
   };
 
+  //CLASS RENDER!
+
+  render() {
+    //Variables
+    let characters = null;
+    const { boss } = this.state;
+    if (this.state.toggleChar) {
+      characters = (
+        <div>
+          <Boss
+            name={boss.name}
+            age={boss.age}
+            key={boss.id}
+            click={this.delCharHandler.bind(this, boss.id)}
+            changed={this.nameChangeHandler}
+          />
+          {/* here I can put another component */}
+          <PersonContainer
+            persons={this.state.persons}
+            changed={this.nameChangeHandler2}
+            click={this.delCharHandler}
+          />
+        </div>
+      );
+    }
+    //Render RETURN!
+    return (
+      <div className="App">
+        <h1>
+          Hi, I'm a React App <FontAwesomeIcon icon="spinner" spin />
+        </h1>
+        <p>This is really working!</p>
+        <button
+          className={
+            this.state.toggleChar
+              ? this.state.buttons[1]
+              : this.state.buttons[0]
+          }
+          onClick={this.toggleCharactersHandler}
+        >
+          Toggle Characters
+        </button>
+        {characters}
+        {/* place for another component element */}
+        {/* <Other /> */}
+        {/* <Movies /> */}
+      </div>
+    );
+  }
+
+  //CLASS methods
   delCharHandler = perKey => {
     let persons = [...this.state.persons];
     persons = persons.filter(va => va.id !== perKey);
@@ -64,63 +117,6 @@ class App extends Component {
     const lalaland = this.state.toggleChar;
     this.setState({ toggleChar: !lalaland });
   };
-
-  render() {
-    let characters = null;
-    const { boss } = this.state;
-    if (this.state.toggleChar) {
-      characters = (
-        <div>
-          <Boss
-            name={boss.name}
-            age={boss.age}
-            key={boss.id}
-            click={this.delCharHandler.bind(this, boss.id)}
-            changed={this.nameChangeHandler}
-          />
-
-          {this.state.persons.map(elem => {
-            return (
-              <Person
-                name={elem.name}
-                age={elem.age}
-                key={elem.id}
-                click={() => this.delCharHandler(elem.id)}
-                // click={this.delCharHandler.bind(this, elem.id)}
-                changed={e => {
-                  this.nameChangeHandler2(e, elem.id);
-                }}
-              />
-            );
-          })}
-          {/* here I can put another component */}
-        </div>
-      );
-    }
-
-    return (
-      <div className="App">
-        <h1>
-          Hi, I'm a React App <FontAwesomeIcon icon="spinner" spin />
-        </h1>
-        <p>This is really working!</p>
-        <button
-          className={
-            this.state.toggleChar
-              ? this.state.buttons[1]
-              : this.state.buttons[0]
-          }
-          onClick={this.toggleCharactersHandler}
-        >
-          Toggle Characters
-        </button>
-        {characters}
-        {/* place for another component element */}
-        {/* <Other /> */}
-        <Movies />
-      </div>
-    );
-  }
 }
 
 export default App;
